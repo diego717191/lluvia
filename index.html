@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Lluvia de frases</title>
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      overflow: hidden;
+      color: blue;
+      font-family: monospace;
+      font-size: 20px;
+    }
+
+    .frase {
+      position: absolute;
+      white-space: nowrap;
+      animation: caer linear infinite;
+    }
+
+    @keyframes caer {
+      0% { transform: translateY(-100px); }
+      100% { transform: translateY(110vh); }
+    }
+  </style>
+</head>
+<body>
+  <script>
+    const frase = "Sara te amo con mi vida!";
+    const numFrases = 40; // cantidad de frases cayendo
+
+    for (let i = 0; i < numFrases; i++) {
+      const span = document.createElement("span");
+      span.textContent = frase;
+      span.classList.add("frase");
+      span.style.left = Math.random() * 100 + "vw";
+      span.style.animationDuration = (Math.random() * 5 + 3) + "s";
+      span.style.animationDelay = Math.random() * 5 + "s";
+      document.body.appendChild(span);
+    }
+  </script>
+</body>
+</html>
