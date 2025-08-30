@@ -5,40 +5,53 @@
   <title>Lluvia de frases</title>
   <style>
     body {
-      margin: 0;
       background: black;
+      color: blue; /* 👈 Cambia aquí el color de las letras */
       overflow: hidden;
-      color: blue;
+      margin: 0;
+      height: 100vh;
       font-family: monospace;
-      font-size: 20px;
     }
-
     .frase {
       position: absolute;
-      white-space: nowrap;
-      animation: caer linear infinite;
+      font-size: 24px; /* 👈 Tamaño de la frase */
+      animation: caer 5s linear forwards;
     }
-
     @keyframes caer {
-      0% { transform: translateY(-100px); }
-      100% { transform: translateY(110vh); }
+      from { top: -50px; }
+      to { top: 100vh; }
+    }
+    #imagenFinal {
+      display: none;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* La imagen cubre toda la pantalla */
     }
   </style>
 </head>
 <body>
+  <!-- 👇 Aquí pones tu imagen final -->
+  <img id="imagenFinal" src="https://via.placeholder.com/800x600.png?text=Sara+💖" alt="Imagen final">
+  
   <script>
-    const frase = "Sara te amo con mi vida!";
-    const numFrases = 40; // cantidad de frases cayendo
-
-    for (let i = 0; i < numFrases; i++) {
+    const frase = "¡Sara te amo con mi vida!"; // 👈 Frase fija
+    
+    function crearFrase() {
       const span = document.createElement("span");
+      span.className = "frase";
       span.textContent = frase;
-      span.classList.add("frase");
-      span.style.left = Math.random() * 100 + "vw";
-      span.style.animationDuration = (Math.random() * 5 + 3) + "s";
-      span.style.animationDelay = Math.random() * 5 + "s";
+      span.style.left = Math.random() * window.innerWidth + "px";
       document.body.appendChild(span);
+      setTimeout(() => span.remove(), 5000);
     }
+    
+    // Crear lluvia de frases por 8 segundos
+    const intervalo = setInterval(crearFrase, 300);
+    setTimeout(() => {
+      clearInterval(intervalo);
+      document.getElementById("imagenFinal").style.display = "block";
+    }, 8000); // 👈 tiempo en milisegundos antes de mostrar la imagen
   </script>
 </body>
 </html>
