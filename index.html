@@ -12,38 +12,38 @@
       color: purple;
       font-family: Arial, sans-serif;
       overflow: hidden;
-      text-align: center;
+      height: 100vh;
+      background-image: url("img/WhatsApp\ Image\ 2025-08-29\ at\ 9.53.34\ PM.jpeg"); /* cambia "fondo.jpg" por tu imagen */
+      background-size: cover;
+      background-position: center;
     }
-    .fall {
+    .frase {
       position: absolute;
-      top: -50px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 40px;
-      animation: caer 3s forwards;
+      font-size: 30px;
+      color: purple;
+      white-space: nowrap;
+      animation: caer 5s linear infinite;
     }
     @keyframes caer {
-      to {
-        top: 40%;
-      }
-    }
-    #imagen {
-      display: none;
-      margin-top: 20px;
-      max-width: 300px;
-      border-radius: 15px;
+      0% { top: -50px; opacity: 1; }
+      100% { top: 100vh; opacity: 0; }
     }
   </style>
 </head>
 <body>
-  <div class="fall">¡Te amo papi!</div>
-  <img id="imagen" src="img/WhatsApp Image 2025-08-29 at 9.53.34 PM.jpeg" alt="Imagen especial">
-
   <script>
-    setTimeout(() => {
-      document.querySelector(".fall").style.display = "none";
-      document.getElementById("imagen").style.display = "block";
-    }, 4000); // después de 4 segundos aparece la imagen
+    function crearFrase() {
+      const frase = document.createElement("div");
+      frase.className = "frase";
+      frase.textContent = "¡Te amo papi!";
+      frase.style.left = Math.random() * window.innerWidth + "px";
+      frase.style.animationDuration = (2 + Math.random() * 3) + "s";
+      document.body.appendChild(frase);
+
+      setTimeout(() => frase.remove(), 5000);
+    }
+
+    setInterval(crearFrase, 300); // cada 300ms cae una nueva frase
   </script>
 </body>
 </html>
